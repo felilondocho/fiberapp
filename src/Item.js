@@ -13,14 +13,14 @@ class Item extends Component {
     }
     render() {
         return (
-            <li>
+            <div>
                 <p>{this.props.item}</p>
                 <input
                     name={this.props.item} 
                     type='number'
                     onChange={this.handleChange}
                 />
-            </li>
+            </div>
         );
     }
 }

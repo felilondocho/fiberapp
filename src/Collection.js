@@ -18,18 +18,17 @@ class Collection extends Component {
             <div className='Collection'>
                 {this.props.catalog.map(col => {
                     return (
-                        <div>
+                        <div key={col.id}>
                             <h1>{col.name}</h1>
-                            <ul>
-                                {col.elements.map(element => {
-                                    return(
-                                        <Item
-                                            item={element}
-                                            onItemChange={this.handleItemChange}
-                                        />  
-                                    );
-                                })}
-                            </ul>
+                            {col.elements.map(element => {
+                                return(
+                                    <Item
+                                        key={element.id}
+                                        item={element}
+                                        onItemChange={this.handleItemChange}
+                                    />  
+                                );
+                            })}
                         </div>
                     );
                 })}
