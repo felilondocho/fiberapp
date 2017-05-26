@@ -32,3 +32,15 @@ button {
   top:50%;
   right: 0;
 }
+.fade-in  {
+  opacity: 1;
+  animation-name: slideRight;
+  -webkit-animation-name: slideRight;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+}
+.fade-out {
+  opacity: 0;
+}

@@ -14,16 +14,11 @@ class App extends Component {
         {name:'Fiber2', elements:[1,2,3,4,5]},
       ]
     }
-    this.plusDivs = this.plusDivs.bind(this);
-    this.plusDivs = this.plusDivs.bind(this);
+    this.handleClickOnPrevNext = this.handleClickOnPrevNext.bind(this);
   }
 
   componentDidMount() {
     this.showDivs(this.slideIndex);
-  }
-
-  plusDivs(n) {
-    this.showDivs(this.slideIndex += n);
   }
 
   showDivs(n) {
@@ -32,9 +27,22 @@ class App extends Component {
     if (n > x.length) {this.slideIndex = 1}    
     if (n < 1) {this.slideIndex = x.length}
     for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";  
+      // x[i].style.opacity = "0";
+      x[i].classList.remove('fade-in');
+      x[i].classList.add('fade-out');
     }
-    x[this.slideIndex-1].style.display = "block";  
+    // x[this.slideIndex-1].style.opacity = "1";
+    x[this.slideIndex-1].classList.remove('fade-out');
+    x[this.slideIndex-1].classList.add('fade-in');
+  }
+
+  handleClickOnPrevNext(e) {
+    if (e.target.classList.contains('prev')) {
+      this.showDivs(this.slideIndex -= 1);
+    }
+    if (e.target.classList.contains('next')) {
+      this.showDivs(this.slideIndex += 1);
+    }
   }
 
   render() {
@@ -45,8 +53,8 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <Catalog collections={this.state.collections} />
-        <button class='prev' onClick={this.plusDivs(-1)}>prev</button>
-        <button class='next' onClick={this.plusDivs(1)}>next</button>
+        <button className='prev' onClick={this.handleClickOnPrevNext}>prev</button>
+        <button className='next' onClick={this.handleClickOnPrevNext}>next</button>
       </div>
     );
   }
