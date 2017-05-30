@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-// import FormCat from './FormCat';
 import Catalog from './Catalog';
+import {
+    HashRouter,
+    Switch,
+    Route,
+    Link
+} from 'react-router-dom';
+import {getData} from './utils/ds'
 
 class App extends Component {
   constructor(){
     super();
     this.slideIndex = 1;
-    this.state = {
-      collections: [
-        {name:'Fiber1', elements:[1,2,3,4,5,6,7,8,9,10]},
-        {name:'Fiber2', elements:[1,2,3,4,5]},
-      ]
-    }
+    this.order = [];
+    this.API = getData();
     this.handleClickOnPrevNext = this.handleClickOnPrevNext.bind(this);
   }
 
@@ -27,13 +28,20 @@ class App extends Component {
     if (n > x.length) {this.slideIndex = 1}    
     if (n < 1) {this.slideIndex = x.length}
     for (i = 0; i < x.length; i++) {
-      // x[i].style.opacity = "0";
-      x[i].classList.remove('fade-in');
-      x[i].classList.add('fade-out');
+      x[i].style.display = "none";
+      // x[i].classList.remove('fade-in');
+      // x[i].classList.add('fade-out');
     }
-    // x[this.slideIndex-1].style.opacity = "1";
-    x[this.slideIndex-1].classList.remove('fade-out');
-    x[this.slideIndex-1].classList.add('fade-in');
+    x[this.slideIndex-1].style.display = "block";
+    // x[this.slideIndex-1].classList.remove('fade-out');
+    // x[this.slideIndex-1].classList.add('fade-in');
+  }
+
+  handleOrder(c) {
+    if(!(c.colName in this.order)){
+        this.order = c.colName;
+    }
+    console.log = this.order;
   }
 
   handleClickOnPrevNext(e) {
@@ -49,12 +57,39 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <img src={require('./assets/images/FiberLogo.png')} className="App-logo" alt="logo" />
+            <nav>
+            <ul>
+                {this.API.getCatalogNames().map((catalogName,i) => {
+                    return(
+                        <li key={i}><Link to={'/'+catalogName}>{catalogName}</Link></li>
+                    );
+                })}
+            </ul>
+            </nav>
         </div>
-        <Catalog collections={this.state.collections} />
-        <button className='prev' onClick={this.handleClickOnPrevNext}>prev</button>
-        <button className='next' onClick={this.handleClickOnPrevNext}>next</button>
+        <Switch>
+            {this.API.inv.map((collection,i) => {
+                return(
+                    <Route
+                        path={'/'+collection.Name}
+                        key={i}
+                        render={() => (
+                            <Catalog
+                                onColChange={this.handleOrder}
+                                collections={collection.catalogs} 
+                            />
+                        )}
+                    />
+                );
+            })}
+            {/*<Route component={NoMatch}/>*/}
+        </Switch>
+        <button className='ctrlbtn prev' onClick={this.handleClickOnPrevNext}>prev</button>
+        <button className='ctrlbtn next' onClick={this.handleClickOnPrevNext}>next</button>
+        <div className='App-footer'>
+          <button className='finishOrder'>Finalizar</button>
+        </div>
       </div>
     );
   }

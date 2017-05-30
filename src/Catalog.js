@@ -7,16 +7,17 @@ class Catalog extends Component {
         this.handleColChange = this.handleColChange.bind(this);
     }
 
-    handleColChange(Col) {
-        console.log(Col)
+    handleColChange(col) {
+        this.props.onColChange(col);
     }
 
     render() {
         return (
             <div className='Catalog'>
-                {this.props.collections.map(cat => {
+                {this.props.collections.map((cat,i) => {
                     return(
                         <Collection
+                            key={i}
                             catalog={[cat]}
                             name={cat.name}
                             onCollectionChange={this.handleColChange}

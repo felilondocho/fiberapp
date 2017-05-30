@@ -13,7 +13,7 @@ class Item extends Component {
     }
     render() {
         return (
-            <div>
+            <div className='Item'>
                 <p>{this.props.item}</p>
                 <input
                     name={this.props.item} 
