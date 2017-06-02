@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Catalog from './Catalog';
+import ContentMenu from './ContentMenu';
 import {
     HashRouter,
     Switch,
@@ -12,45 +13,7 @@ import {getData} from './utils/ds'
 class App extends Component {
   constructor(){
     super();
-    this.slideIndex = 1;
-    this.order = [];
     this.API = getData();
-    this.handleClickOnPrevNext = this.handleClickOnPrevNext.bind(this);
-  }
-
-  componentDidMount() {
-    this.showDivs(this.slideIndex);
-  }
-
-  showDivs(n) {
-    var i;
-    var x = document.getElementsByClassName("Collection");
-    if (n > x.length) {this.slideIndex = 1}    
-    if (n < 1) {this.slideIndex = x.length}
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-      // x[i].classList.remove('fade-in');
-      // x[i].classList.add('fade-out');
-    }
-    x[this.slideIndex-1].style.display = "block";
-    // x[this.slideIndex-1].classList.remove('fade-out');
-    // x[this.slideIndex-1].classList.add('fade-in');
-  }
-
-  handleOrder(c) {
-    if(!(c.colName in this.order)){
-        this.order = c.colName;
-    }
-    console.log = this.order;
-  }
-
-  handleClickOnPrevNext(e) {
-    if (e.target.classList.contains('prev')) {
-      this.showDivs(this.slideIndex -= 1);
-    }
-    if (e.target.classList.contains('next')) {
-      this.showDivs(this.slideIndex += 1);
-    }
   }
 
   render() {
@@ -59,13 +22,11 @@ class App extends Component {
         <div className="App-header">
           <img src={require('./assets/images/FiberLogo.png')} className="App-logo" alt="logo" />
             <nav>
-            <ul>
-                {this.API.getCatalogNames().map((catalogName,i) => {
-                    return(
-                        <li key={i}><Link to={'/'+catalogName}>{catalogName}</Link></li>
-                    );
-                })}
-            </ul>
+                <ul>
+                    <ContentMenu
+                        cat_names={this.API.getCatalogNames()}
+                    />
+                </ul>
             </nav>
         </div>
         <Switch>
@@ -83,13 +44,14 @@ class App extends Component {
                     />
                 );
             })}
-            {/*<Route component={NoMatch}/>*/}
+            <Route 
+                render={() => (
+                    <ContentMenu
+                        cat_names={this.API.getCatalogNames()}
+                    />
+                )}
+            />
         </Switch>
-        <button className='ctrlbtn prev' onClick={this.handleClickOnPrevNext}>prev</button>
-        <button className='ctrlbtn next' onClick={this.handleClickOnPrevNext}>next</button>
-        <div className='App-footer'>
-          <button className='finishOrder'>Finalizar</button>
-        </div>
       </div>
     );
   }
