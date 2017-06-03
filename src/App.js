@@ -22,11 +22,9 @@ class App extends Component {
         <div className="App-header">
           <img src={require('./assets/images/FiberLogo.png')} className="App-logo" alt="logo" />
             <nav>
-                <ul>
-                    <ContentMenu
-                        cat_names={this.API.getCatalogNames()}
-                    />
-                </ul>
+                <ContentMenu
+                    cat_names={this.API.getCatalogNames()}
+                />
             </nav>
         </div>
         <Switch>
@@ -46,9 +44,11 @@ class App extends Component {
             })}
             <Route 
                 render={() => (
-                    <ContentMenu
-                        cat_names={this.API.getCatalogNames()}
-                    />
+                    <div className='home_menu'>
+                        <ContentMenu
+                            cat_names={this.API.getCatalogNames()}
+                        />
+                    </div>
                 )}
             />
         </Switch>

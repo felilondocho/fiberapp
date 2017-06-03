@@ -1,14 +1,52 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
     background: #000;
+    font-family: 'Oswald', sans-serif;
 }
 ul {
     list-style: none;
 }
 p,input {
     display: inline-block;
+}
+
+nav ul {
+    width: 100%;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    font-size: 30px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.home_menu ul {
+    padding: 0;
+}
+.home_menu ul li {
+    margin: 10px;
+}
+.home_menu ul li a {
+    font-size: 30px;
+    text-decoration: none;
+    color: #fff;
+    padding: 20px;
+    border: 1px solid;
+    text-transform: uppercase;
+    display: inline-block;
+    width: 50%;
+}
+.home_menu ul li a:hover {
+    color: #000;
+    background-color: #fff;
 }
 
 .Collection {
@@ -39,9 +77,23 @@ p,input {
     font-size: 20px;
     width: 40px;
 }
-
 .ctrlbtn {
     position: fixed;
+    display: block;
+    background-color: transparent;
+    border: none;
+}
+.prev:before {
+    content: '\f060';
+    font-family: "FontAwesome";
+    color:#fff;
+    font-size: 30px;
+}
+.next:before {
+    content: '\f061';
+    font-family: "FontAwesome";
+    color:#fff;
+    font-size: 30px;
 }
 .prev {
     top:50%;
@@ -78,4 +130,7 @@ p,input {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    cursor: pointer;
 }
