@@ -99,12 +99,8 @@ class Catalog extends Component {
                     );
                 })}
                 <button className='ctrlbtn prev ' onClick={this.handleClickOnPrevNext}>
-                    {/*<i className="fa fa-arrow-left"></i>*/}
-                    a
                 </button>
                 <button className='ctrlbtn next' onClick={this.handleClickOnPrevNext}>
-                    {/*<i className="fa fa-arrow-right"></i>*/}
-                    a
                 </button>
                 <div className='App-footer'>
                     <button className='finishOrder' onClick={this.handleSubmit}>Finalizar</button>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Item from './Item'
+import Item from './Item';
 
 class Collection extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ class Collection extends Component {
                 {this.props.catalog.map((col,i) => {
                     return (
                         <div key={i} style={{backgroundColor:col.bg}}>
-                            <h1>{col.name}</h1>
+                            <img src={col.icon}/>
                             {col.elements.map((element,i) => {
                                 return(
                                     <Item
