@@ -22,7 +22,7 @@ class Collection extends Component {
                 {this.props.catalog.map((col,i) => {
                     return (
                         <div key={i} style={{backgroundColor:col.bg}}>
-                            <img src={col.icon}/>
+                            <img src={col.icon} alt='icono'/>
                             {col.elements.map((element,i) => {
                                 return(
                                     <Item
